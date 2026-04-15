@@ -3,95 +3,66 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="apple-mobile-web-app-capable" content="yes">
 <title>Warehouse Rental Tax Planner</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=DM+Sans:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#F6F4EF;--surface:#FFFFFF;--surface2:#EFEDE8;
-  --border:#DDD9D0;
+  --bg:#F6F4EF;--surface:#FFFFFF;--surface2:#EFEDE8;--border:#DDD9D0;
   --text:#18150F;--text2:#6B6558;--text3:#9B978C;
   --teal:#0E6652;--teal-bg:#E5F4EE;--teal-text:#0A4A3A;
   --amber:#8A5208;--amber-bg:#FEF1D8;--amber-text:#6B3D05;
-  --red:#A8302E;
+  --red:#A8302E;--red-bg:#FDEAEA;
   --navy:#1B3A6B;--navy-bg:#EBF0F8;--navy-text:#122855;
 }
 *{-webkit-box-sizing:border-box;box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,-apple-system,sans-serif;font-size:14px;line-height:1.6;}
-.page{max-width:880px;margin:0 auto;padding:2rem 1rem 5rem;}
+.page{max-width:900px;margin:0 auto;padding:2rem 1rem 5rem;}
 
+/* Header */
 .hdr{margin-bottom:1.75rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border);}
 .hdr-tag{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
 .hdr h1{font-family:'Fraunces',Georgia,serif;font-size:26px;font-weight:600;color:var(--text);line-height:1.2;margin-bottom:6px;}
 .hdr p{font-size:13px;color:var(--text2);}
 
+/* Config */
 .cfg{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.25rem;margin-bottom:1.5rem;}
 .sl{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:8px;}
-
-/* Tabs: use margin-right instead of gap for iOS 14 compat */
-.tabs{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;padding-bottom:8px;}
-.tab{
-  font-size:13px;font-weight:500;
-  padding:7px 14px;
-  border:1px solid var(--border);border-radius:20px;
-  background:transparent;color:var(--text2);
-  cursor:pointer;
-  -webkit-appearance:none;appearance:none;
-  touch-action:manipulation;
-  margin-right:6px;margin-bottom:6px;
-  line-height:1.4;
-}
+.tabs{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;}
+.tab{font-size:13px;font-weight:500;padding:8px 15px;border:1px solid var(--border);border-radius:20px;background:transparent;color:var(--text2);cursor:pointer;-webkit-appearance:none;appearance:none;touch-action:manipulation;margin-right:6px;margin-bottom:6px;line-height:1.4;-webkit-user-select:none;user-select:none;}
 .tab.ab{background:var(--navy-bg);color:var(--navy-text);border-color:transparent;}
 .tab.at{background:var(--teal-bg);color:var(--teal-text);border-color:transparent;}
 .tab.aa{background:var(--amber-bg);color:var(--amber-text);border-color:transparent;}
-
 .divider{border:none;border-top:1px solid var(--border);margin:1rem 0;}
-
-/* Two-col: flex-based, wraps on small screens */
-.two-col{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin-right:-12px;}
-.two-col>.field{-webkit-flex:1 1 200px;flex:1 1 200px;margin-right:12px;margin-bottom:12px;}
-
+.two-col{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;}
+.two-col > .field{-webkit-flex:1 1 200px;flex:1 1 200px;margin-right:12px;margin-bottom:12px;}
 .field{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;}
-.field label{font-size:11px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--text2);margin-bottom:6px;}
-.field input{
-  background:var(--bg);
-  border:1px solid var(--border);
-  border-radius:8px;
-  padding:10px 12px;
-  font-family:'DM Mono',monospace;
-  font-size:16px; /* prevents iOS zoom on focus */
-  color:var(--text);
-  outline:none;
-  width:100%;
-  -webkit-appearance:none;
-  appearance:none;
-}
+.field label{font-size:11px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--text2);margin-bottom:6px;display:block;}
+.field input{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-family:'DM Mono',monospace;font-size:16px;color:var(--text);outline:none;width:100%;-webkit-appearance:none;appearance:none;display:block;}
 .field input:disabled{opacity:.35;background:var(--surface2);}
-.hint{font-size:11px;color:var(--text3);margin-top:4px;}
-
-/* Regime toggle */
+.hint{font-size:11px;color:var(--text3);margin-top:4px;display:block;}
 .rtog{display:-webkit-flex;display:flex;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:14px;}
-.rt{
-  font-size:13px;font-weight:500;
-  padding:9px 14px;
-  background:transparent;color:var(--text2);
-  border:none;cursor:pointer;
-  -webkit-appearance:none;appearance:none;
-  touch-action:manipulation;
-  -webkit-flex:1;flex:1;
-  text-align:center;
-}
+.rt{font-size:13px;font-weight:500;padding:9px 14px;background:transparent;color:var(--text2);border:none;cursor:pointer;-webkit-appearance:none;appearance:none;touch-action:manipulation;-webkit-flex:1;flex:1;text-align:center;-webkit-user-select:none;user-select:none;}
 .rt.act{background:var(--navy);color:#fff;}
 
+/* Ownership badge */
+.who-grid{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin-bottom:14px;}
+.who-box{-webkit-flex:1 1 160px;flex:1 1 160px;border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-right:10px;margin-bottom:8px;}
+.who-box.navy{border-color:var(--navy);background:var(--navy-bg);}
+.who-box.teal{border-color:var(--teal);background:var(--teal-bg);}
+.who-ent{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;}
+.who-box.navy .who-ent{color:var(--navy-text);}
+.who-box.teal .who-ent{color:var(--teal-text);}
+.who-wh{font-family:'DM Mono',monospace;font-size:14px;font-weight:500;}
+.who-box.navy .who-wh{color:var(--navy);}
+.who-box.teal .who-wh{color:var(--teal);}
+.who-note{font-size:11px;margin-top:2px;}
+.who-box.navy .who-note{color:var(--navy-text);opacity:.7;}
+.who-box.teal .who-note{color:var(--teal-text);opacity:.7;}
+
 /* Metrics */
-.mets{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin-right:-8px;margin-bottom:1.5rem;}
-.mc{
-  background:var(--surface);border:1px solid var(--border);border-radius:11px;
-  padding:12px 14px;
-  -webkit-flex:1 1 130px;flex:1 1 130px;
-  margin-right:8px;margin-bottom:8px;
-}
+.mets{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin-bottom:1.5rem;}
+.mc{background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:12px 14px;-webkit-flex:1 1 130px;flex:1 1 130px;margin-right:8px;margin-bottom:8px;}
 .mc.hi{border-color:var(--teal);background:var(--teal-bg);}
 .mc-l{font-size:11px;color:var(--text2);margin-bottom:3px;}
 .mc-v{font-family:'DM Mono',monospace;font-size:18px;font-weight:500;color:var(--text);}
@@ -100,8 +71,11 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,-app
 
 /* Table card */
 .tcard{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:1.5rem;}
-.thead-bar{background:var(--surface2);padding:10px 14px;border-bottom:1px solid var(--border);}
+.thead-bar{background:var(--surface2);padding:10px 14px;border-bottom:1px solid var(--border);display:-webkit-flex;display:flex;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;align-items:center;}
 .thead-bar h3{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);}
+.view-tog{display:-webkit-flex;display:flex;border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.vt{font-size:11px;font-weight:500;padding:4px 10px;background:transparent;color:var(--text2);border:none;cursor:pointer;-webkit-appearance:none;appearance:none;touch-action:manipulation;-webkit-user-select:none;user-select:none;}
+.vt.act{background:var(--navy);color:#fff;}
 .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
 table{width:100%;border-collapse:collapse;font-size:12px;min-width:380px;}
 th{font-size:11px;font-weight:500;color:var(--text2);text-align:left;padding:8px 12px;border-bottom:1px solid var(--border);background:var(--surface2);white-space:nowrap;}
@@ -114,119 +88,115 @@ tr:last-child td{border-bottom:none;}
 .pg{background:var(--teal-bg);color:var(--teal-text);}
 .pa{background:var(--amber-bg);color:var(--amber-text);}
 
+/* Charts */
+.charts-grid{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin-bottom:1.5rem;}
+.chart-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 16px;-webkit-flex:1 1 280px;flex:1 1 280px;margin-right:10px;margin-bottom:10px;}
+.chart-title{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);margin-bottom:10px;}
+.chart-wrap{position:relative;width:100%;height:200px;}
+.chart-legend{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin-top:10px;}
+.leg-item{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;font-size:11px;color:var(--text2);margin-right:14px;margin-bottom:4px;}
+.leg-sq{width:10px;height:10px;border-radius:2px;margin-right:5px;-webkit-flex-shrink:0;flex-shrink:0;}
+.leg-dash{width:16px;height:2px;border-top:2px dashed var(--red);margin-right:5px;-webkit-flex-shrink:0;flex-shrink:0;}
+
 /* Year cards */
-.yg{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin-right:-10px;margin-bottom:1.5rem;}
-.yc{
-  background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;
-  -webkit-flex:1 1 280px;flex:1 1 280px;
-  margin-right:10px;margin-bottom:10px;
-}
-.yc-hd{
-  background:var(--surface2);padding:10px 14px;border-bottom:1px solid var(--border);
-  display:-webkit-flex;display:flex;
-  -webkit-justify-content:space-between;justify-content:space-between;
-  -webkit-align-items:center;align-items:center;
-}
+.yg{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;margin-bottom:1.5rem;}
+.yc{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;-webkit-flex:1 1 280px;flex:1 1 280px;margin-right:10px;margin-bottom:10px;}
+.yc-hd{background:var(--surface2);padding:10px 14px;border-bottom:1px solid var(--border);display:-webkit-flex;display:flex;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;align-items:center;}
 .yc-yr{font-family:'Fraunces',Georgia,serif;font-size:16px;font-weight:600;color:var(--text);}
 .yc-rent{font-family:'DM Mono',monospace;font-size:12px;color:var(--text2);}
 .yc-bd{padding:12px 14px;}
 .ent{margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--border);}
 .ent:last-of-type{margin-bottom:0;padding-bottom:0;border-bottom:none;}
-.ent-nm{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:var(--navy);margin-bottom:6px;}
-.er{
-  display:-webkit-flex;display:flex;
-  -webkit-justify-content:space-between;justify-content:space-between;
-  -webkit-align-items:baseline;align-items:baseline;
-  padding:2px 0;
-}
+.ent-nm{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;}
+.ent-nm.navy{color:var(--navy);}
+.ent-nm.teal{color:var(--teal);}
+.er{display:-webkit-flex;display:flex;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:baseline;align-items:baseline;padding:2px 0;}
 .ek{font-size:12px;color:var(--text2);}
 .ev{font-family:'DM Mono',monospace;font-size:12px;text-align:right;color:var(--text);}
 .ev.bld{font-weight:500;}
 .ev.tax{color:var(--red);font-weight:500;}
 .ev.zero{color:var(--teal);font-weight:500;}
-.yc-ft{
-  background:var(--surface2);border-top:1px solid var(--border);
-  padding:9px 14px;
-  display:-webkit-flex;display:flex;
-  -webkit-justify-content:space-between;justify-content:space-between;
-  -webkit-align-items:center;align-items:center;
-}
+.yc-ft{background:var(--surface2);border-top:1px solid var(--border);padding:9px 14px;display:-webkit-flex;display:flex;-webkit-justify-content:space-between;justify-content:space-between;-webkit-align-items:center;align-items:center;}
 .yc-ft-l{font-size:12px;color:var(--text2);}
 .yc-ft-v{font-family:'DM Mono',monospace;font-size:15px;font-weight:500;color:var(--red);}
 .yc-ft-v.zero{color:var(--teal);}
 
+/* Recommendation */
 .rec{background:var(--navy);border-radius:14px;padding:1.25rem 1.4rem;margin-bottom:1.5rem;color:#fff;}
 .rec-lbl{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;opacity:.65;margin-bottom:8px;}
 .rec-body{font-size:13px;line-height:1.75;opacity:.88;}
 .rec-body strong{opacity:1;font-weight:600;}
 
+/* Print */
 .print-row{display:-webkit-flex;display:flex;-webkit-justify-content:flex-end;justify-content:flex-end;margin-bottom:1.25rem;}
-.btn-print{
-  font-size:13px;font-weight:500;padding:8px 18px;
-  border:1px solid var(--border);border-radius:20px;
-  background:var(--surface);color:var(--text2);
-  cursor:pointer;-webkit-appearance:none;appearance:none;touch-action:manipulation;
-}
-
+.btn-print{font-size:13px;font-weight:500;padding:8px 18px;border:1px solid var(--border);border-radius:20px;background:var(--surface);color:var(--text2);cursor:pointer;-webkit-appearance:none;appearance:none;touch-action:manipulation;}
 .foot{font-size:11px;color:var(--text3);padding-top:1.25rem;border-top:1px solid var(--border);line-height:1.8;}
 .foot strong{color:var(--text2);}
-
 @media print{.btn-print,.print-row{display:none;}}
-@media(max-width:400px){
-  .hdr h1{font-size:22px;}
-  .tab{font-size:12px;padding:6px 11px;}
-}
+@media(max-width:400px){.hdr h1{font-size:22px;}.tab{font-size:12px;padding:7px 11px;}}
 </style>
 </head>
 <body>
 <div class="page">
 
-<div class="print-row">
-  <button class="btn-print" onclick="window.print()">Print / Save PDF</button>
-</div>
+<div class="print-row"><button class="btn-print" id="btn-print">Print / Save PDF</button></div>
 
 <header class="hdr">
   <div class="hdr-tag">Warehouse Rental Tax Planner</div>
   <h1>GST &amp; Income Tax<br>Optimisation Calculator</h1>
-  <p>Two-warehouse split &middot; Child &amp; Parent ownership &middot; Annual escalation &middot; 4-year projection</p>
+  <p>Parent holds expensive warehouse &middot; Child holds cheaper one &middot; Annual escalation &middot; 4-year projection</p>
 </header>
 
 <div class="cfg">
   <div class="sl">Base parameters</div>
   <div class="two-col" style="margin-bottom:4px;">
     <div class="field">
-      <label>Monthly rent (&#8377;)</label>
-      <input type="number" id="base" value="375000" step="5000" inputmode="numeric" oninput="render()">
+      <label for="base">Total monthly rent (&#8377;)</label>
+      <input type="number" id="base" value="375000" step="5000" inputmode="numeric">
     </div>
     <div class="field">
-      <label>Annual escalation (%)</label>
-      <input type="number" id="esc" value="5" step="0.5" min="0" max="25" inputmode="decimal" oninput="render()">
+      <label for="esc">Annual escalation (%)</label>
+      <input type="number" id="esc" value="5" step="0.5" min="0" max="25" inputmode="decimal">
       <span class="hint">Applied at start of each new year</span>
     </div>
   </div>
 
   <div class="divider"></div>
 
-  <div class="sl">Rent split &mdash; W-A (GST fwd charge) / W-B (RCM)</div>
+  <div class="sl">Rent split &mdash; Parent (W-A, expensive) / Child (W-B, cheaper)</div>
   <div class="tabs" id="stabs">
-    <button class="tab" onclick="setSplit(0,this)">60 / 40</button>
-    <button class="tab ab" onclick="setSplit(1,this)">65 / 35</button>
-    <button class="tab" onclick="setSplit(2,this)">70 / 30 &#9733;</button>
-    <button class="tab" onclick="setSplit(3,this)">75 / 25</button>
+    <button class="tab" data-split="0">60 / 40</button>
+    <button class="tab ab" data-split="1">65 / 35</button>
+    <button class="tab" data-split="2">70 / 30 &#9733;</button>
+    <button class="tab" data-split="3">75 / 25</button>
   </div>
 
-  <div class="sl">Ownership</div>
+  <!-- Ownership summary badges -->
+  <div class="who-grid" id="who-grid">
+    <div class="who-box navy">
+      <div class="who-ent">Parent</div>
+      <div class="who-wh" id="who-parent-wh">W-A &mdash; &#8377;2,43,750/mo</div>
+      <div class="who-note">GST registered &middot; forward charge</div>
+    </div>
+    <div class="who-box teal">
+      <div class="who-ent">Child</div>
+      <div class="who-wh" id="who-child-wh">W-B &mdash; &#8377;1,31,250/mo</div>
+      <div class="who-note">Below &#8377;20L &middot; tenant pays RCM</div>
+    </div>
+  </div>
+
+  <div class="sl">Ownership structure</div>
   <div class="tabs" id="otabs">
-    <button class="tab" onclick="setOwn(0,this)">Child only</button>
-    <button class="tab at" onclick="setOwn(1,this)">Child + Parent</button>
+    <button class="tab" data-own="0">Single owner (child only)</button>
+    <button class="tab at" data-own="1">Parent + Child</button>
   </div>
 
   <div id="age-section">
     <div class="sl">Parent&rsquo;s age &nbsp;<span style="font-size:10px;color:var(--text3);text-transform:none;letter-spacing:0;">(affects old-regime slabs only)</span></div>
     <div class="tabs" id="agtabs">
-      <button class="tab" onclick="setAge(0,this)">Below 60</button>
-      <button class="tab aa" onclick="setAge(1,this)">60&ndash;79 Senior</button>
-      <button class="tab" onclick="setAge(2,this)">80+ Super Senior</button>
+      <button class="tab" data-age="0">Below 60</button>
+      <button class="tab aa" data-age="1">60&ndash;79 Senior</button>
+      <button class="tab" data-age="2">80+ Super Senior</button>
     </div>
   </div>
 
@@ -234,20 +204,20 @@ tr:last-child td{border-bottom:none;}
 
   <div class="sl">Tax regime</div>
   <div class="rtog">
-    <button class="rt act" id="r-new" onclick="setReg('new')">New regime &mdash; FY 2025-26</button>
-    <button class="rt" id="r-old" onclick="setReg('old')">Old regime</button>
+    <button class="rt act" id="r-new" data-reg="new">New regime &mdash; FY 2025-26</button>
+    <button class="rt" id="r-old" data-reg="old">Old regime</button>
   </div>
 
   <div class="two-col">
     <div class="field">
-      <label>Child &mdash; other annual income (&#8377;)</label>
-      <input type="number" id="oi1" value="0" step="100000" inputmode="numeric" oninput="render()">
-      <span class="hint">Salary, business, other rent, etc.</span>
+      <label for="oi2">Parent &mdash; other annual income (&#8377;)</label>
+      <input type="number" id="oi2" value="0" step="100000" inputmode="numeric">
+      <span class="hint">Pension, salary, other rent, etc.</span>
     </div>
     <div class="field">
-      <label>Parent &mdash; other annual income (&#8377;)</label>
-      <input type="number" id="oi2" value="0" step="100000" inputmode="numeric" oninput="render()">
-      <span class="hint">Pension, other sources</span>
+      <label for="oi1">Child &mdash; other annual income (&#8377;)</label>
+      <input type="number" id="oi1" value="0" step="100000" inputmode="numeric">
+      <span class="hint">Salary, business, etc.</span>
     </div>
   </div>
 </div>
@@ -257,21 +227,51 @@ tr:last-child td{border-bottom:none;}
   <div class="mc"><div class="mc-l">4-year total rent</div><div class="mc-v" id="m1">&#8212;</div></div>
   <div class="mc"><div class="mc-l">4-year income tax</div><div class="mc-v" id="m2">&#8212;</div></div>
   <div class="mc"><div class="mc-l">Effective tax rate</div><div class="mc-v" id="m3">&#8212;</div><div class="mc-s">on gross rental income</div></div>
-  <div class="mc" id="m4c"><div class="mc-l">Saved vs child-only</div><div class="mc-v" id="m4">&#8212;</div><div class="mc-s">over 4 years</div></div>
+  <div class="mc" id="m4c"><div class="mc-l">Saved vs single owner</div><div class="mc-v" id="m4">&#8212;</div><div class="mc-s">over 4 years</div></div>
 </div>
 
 <!-- RENT TABLE -->
 <div class="tcard">
-  <div class="thead-bar"><h3>Rent &amp; GST &mdash; year by year</h3></div>
+  <div class="thead-bar">
+    <h3>Rent &amp; GST &mdash; year by year</h3>
+    <div class="view-tog">
+      <button class="vt act" id="vt-annual">Annual</button>
+      <button class="vt" id="vt-monthly">Monthly</button>
+    </div>
+  </div>
   <div class="tscroll">
     <table>
       <thead><tr>
-        <th>Year</th><th class="r">Monthly</th><th class="r">W-A annual</th>
-        <th class="r">W-B annual</th><th>W-B GST mode</th>
-        <th class="r">RCM (tenant)</th><th class="r">Total</th>
+        <th>Year</th>
+        <th class="r">Parent W-A</th>
+        <th class="r">Child W-B</th>
+        <th>W-B GST mode</th>
+        <th class="r">RCM (tenant)</th>
+        <th class="r">Total</th>
       </tr></thead>
       <tbody id="rtb"></tbody>
     </table>
+  </div>
+</div>
+
+<!-- CHARTS -->
+<div class="charts-grid">
+  <div class="chart-card">
+    <div class="chart-title">Rent growth vs GST threshold</div>
+    <div class="chart-wrap"><canvas id="chart-rent" role="img" aria-label="Rent growth chart">Rent split between parent and child over 4 years with GST threshold line.</canvas></div>
+    <div class="chart-legend">
+      <span class="leg-item"><span class="leg-sq" style="background:#1B3A6B;"></span>Parent (W-A)</span>
+      <span class="leg-item"><span class="leg-sq" style="background:#0E6652;"></span>Child (W-B)</span>
+      <span class="leg-item"><span class="leg-dash"></span>&#8377;20L GST limit</span>
+    </div>
+  </div>
+  <div class="chart-card">
+    <div class="chart-title">Income tax per entity per year</div>
+    <div class="chart-wrap"><canvas id="chart-tax" role="img" aria-label="Income tax breakdown by entity per year">Income tax payable by parent and child for each of the 4 years.</canvas></div>
+    <div class="chart-legend">
+      <span class="leg-item"><span class="leg-sq" style="background:#1B3A6B;"></span>Parent</span>
+      <span class="leg-item"><span class="leg-sq" style="background:#0E6652;"></span>Child</span>
+    </div>
   </div>
 </div>
 
@@ -279,7 +279,7 @@ tr:last-child td{border-bottom:none;}
 <div class="sl" style="margin-bottom:10px;">Income tax &mdash; per entity per year</div>
 <div class="yg" id="ycards"></div>
 
-<!-- 4YR SUMMARY TABLE -->
+<!-- SUMMARY TABLE -->
 <div class="tcard">
   <div class="thead-bar"><h3>4-year income tax summary</h3></div>
   <div class="tscroll">
@@ -300,179 +300,369 @@ tr:last-child td{border-bottom:none;}
 </div>
 
 <footer class="foot">
-  <strong>How figures are calculated:</strong> House property income = gross annual rent &times; 70% (30% std deduction, Sec 24(a)). New regime (Budget 2025, FY 2025-26): &#8377;0&ndash;4L nil, &#8377;4&ndash;8L 5%, &#8377;8&ndash;12L 10%, &#8377;12&ndash;16L 15%, &#8377;16&ndash;20L 20%, &#8377;20&ndash;24L 25%, above &#8377;24L 30%. Sec 87A rebate: income &le;&#8377;12L &rarr; nil tax. Old regime: 87A if income &le;&#8377;5L; senior (60&ndash;79) exemption &#8377;3L; super senior (80+) exemption &#8377;5L. Cess 4%. GST threshold &#8377;20L/yr; RCM under Notification 05/2022. No municipal tax deduction assumed.
+  <strong>How figures are calculated:</strong> House property income = gross annual rent &times; 70% (30% std deduction, Sec 24(a)). New regime (Budget 2025, FY 2025-26): &#8377;0&ndash;4L nil, &#8377;4&ndash;8L 5%, &#8377;8&ndash;12L 10%, &#8377;12&ndash;16L 15%, &#8377;16&ndash;20L 20%, &#8377;20&ndash;24L 25%, above &#8377;24L 30%. Sec 87A rebate: income &le;&#8377;12L &rarr; nil tax. Old regime: 87A if &le;&#8377;5L; senior (60&ndash;79) &#8377;3L exemption; super senior (80+) &#8377;5L exemption. Cess 4%. GST threshold &#8377;20L/yr; RCM under Notification 05/2022. No municipal tax deduction assumed. Parent always holds W-A (higher rent, GST registered). Child holds W-B (lower rent, benefits from RCM while below threshold).
   <br><br>
-  <strong>Disclaimer:</strong> Indicative planning tool only &mdash; not tax or legal advice. Verify all figures with a qualified CA. Clubbing provisions (Sec 64) and stamp duty implications must be evaluated separately.
+  <strong>Disclaimer:</strong> Indicative planning tool only &mdash; not tax or legal advice. Verify with a qualified CA. Clubbing provisions (Sec 64) and stamp duty implications must be evaluated separately.
   <br><br><span id="gen-date"></span>
 </footer>
 
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-var SP=[.60,.65,.70,.75];
-var SPL=['60/40','65/35','70/30','75/25'];
-var cs=1,co=1,cage=1,creg='new';
-var THRESH=2000000;
+document.addEventListener('DOMContentLoaded', function() {
 
-function fL(n){
-  if(Math.abs(n)>=10000000) return '\u20B9'+(n/10000000).toFixed(2)+'Cr';
-  return '\u20B9'+(n/100000).toFixed(2)+'L';
-}
-function fM(n){ return '\u20B9'+Math.round(n).toLocaleString('en-IN'); }
+  /* ---- state ---- */
+  var SP    = [0.60, 0.65, 0.70, 0.75];
+  var SPL   = ['60/40','65/35','70/30','75/25'];
+  var cs    = 1;   // split index
+  var co    = 1;   // ownership: 0=child only, 1=parent+child
+  var cage  = 1;   // parent age: 0=<60, 1=60-79, 2=80+
+  var creg  = 'new';
+  var cview = 'annual'; // 'annual' or 'monthly'
+  var THRESH = 2000000;
+  var rentChart = null, taxChart = null;
 
-function taxNew(i){
-  if(i<=0)return 0;
-  var b=[[0,400000,0],[400000,800000,.05],[800000,1200000,.10],[1200000,1600000,.15],[1600000,2000000,.20],[2000000,2400000,.25],[2400000,1e10,.30]];
-  var t=0,j;
-  for(j=0;j<b.length;j++) if(i>b[j][0]) t+=(Math.min(i,b[j][1])-b[j][0])*b[j][2];
-  if(i<=1200000) t=0;
-  return Math.round(t*1.04);
-}
-function taxOld(i,ag){
-  if(i<=0)return 0;
-  var b,j;
-  if(ag===2)      b=[[0,500000,0],[500000,1000000,.20],[1000000,1e10,.30]];
-  else if(ag===1) b=[[0,300000,0],[300000,500000,.05],[500000,1000000,.20],[1000000,1e10,.30]];
-  else            b=[[0,250000,0],[250000,500000,.05],[500000,1000000,.20],[1000000,1e10,.30]];
-  var t=0;
-  for(j=0;j<b.length;j++) if(i>b[j][0]) t+=(Math.min(i,b[j][1])-b[j][0])*b[j][2];
-  if(ag<2&&i<=500000) t=0;
-  return Math.round(t*1.04);
-}
-function ct(i,p){ return creg==='new'?taxNew(i):taxOld(i,p?cage:0); }
-
-function render(){
-  var base=parseFloat(document.getElementById('base').value)||375000;
-  var ep=(parseFloat(document.getElementById('esc').value)||5)/100;
-  var oi1=parseFloat(document.getElementById('oi1').value)||0;
-  var oi2=parseFloat(document.getElementById('oi2').value)||0;
-  var sp=SP[cs], dual=(co===1);
-
-  document.getElementById('oi2').disabled=!dual;
-  document.getElementById('age-section').style.display=dual?'block':'none';
-
-  var yrs=[],y;
-  for(y=1;y<=4;y++){
-    var m=Math.pow(1+ep,y-1);
-    var w1=base*sp*12*m, w2=base*(1-sp)*12*m;
-    var rcm=(w2<THRESH);
-    var h1=w1*.7, h2=w2*.7;
-    var e1i,e2i,e1t,e2t;
-    if(dual){e1i=h1+oi1;e2i=h2+oi2;e1t=ct(e1i,false);e2t=ct(e2i,true);}
-    else{e1i=(h1+h2)+oi1;e2i=0;e1t=ct(e1i,false);e2t=0;}
-    yrs.push({y:y,w1:w1,w2:w2,rcm:rcm,h1:h1,h2:h2,e1i:e1i,e2i:e2i,e1t:e1t,e2t:e2t,tot:w1+w2,tt:e1t+e2t});
-  }
-
-  // Rent table
-  var s='';
-  for(y=0;y<4;y++){
-    var r=yrs[y];
-    s+='<tr><td class="lbl">Year '+r.y+'</td>'+
-      '<td class="r">'+fM((r.tot)/12)+'</td>'+
-      '<td class="r">'+fL(r.w1)+'</td>'+
-      '<td class="r">'+fL(r.w2)+'</td>'+
-      '<td><span class="pill '+(r.rcm?'pg':'pa')+'">'+(r.rcm?'RCM \u2014 tenant pays':'Forward charge')+'</span></td>'+
-      '<td class="r" style="color:var(--text2)">'+(r.rcm?fL(r.w2*.18):'\u2014')+'</td>'+
-      '<td class="r" style="font-weight:500">'+fL(r.tot)+'</td></tr>';
-  }
-  document.getElementById('rtb').innerHTML=s;
-
-  // Year cards
-  s='';
-  for(y=0;y<4;y++){
-    var r=yrs[y];
-    var e2b='';
-    if(dual){
-      e2b='<div class="ent"><div class="ent-nm">Parent \u2014 Warehouse B</div>'+
-        '<div class="er"><span class="ek">HP income (rent \u00D770%)</span><span class="ev">'+fL(r.h2)+'</span></div>'+
-        (r.e2i!==r.h2?'<div class="er"><span class="ek">+ Other income</span><span class="ev">'+fL(r.e2i-r.h2)+'</span></div>':'')+
-        '<div class="er"><span class="ek">Total taxable</span><span class="ev bld">'+fL(r.e2i)+'</span></div>'+
-        '<div class="er"><span class="ek">Income tax</span><span class="ev '+(r.e2t===0?'zero':'tax')+'">'+(r.e2t===0?'\u20B90 \u2014 nil':fL(r.e2t))+'</span></div></div>';
+  /* ---- number helpers (no locale dep) ---- */
+  function inr(n) {
+    var neg = n < 0;
+    n = Math.abs(Math.round(n));
+    var s = String(n), r = '';
+    if (s.length <= 3) { r = s; }
+    else {
+      r = s.slice(-3); s = s.slice(0,-3);
+      while (s.length > 2) { r = s.slice(-2)+','+r; s = s.slice(0,-2); }
+      if (s.length) r = s+','+r;
     }
-    var lbl=dual?'Warehouse A':'Both warehouses';
-    var ex=!dual?'<div class="er"><span class="ek">+ W-B HP income</span><span class="ev">'+fL(r.h2)+'</span></div>':'';
-    s+='<div class="yc">'+
-      '<div class="yc-hd"><span class="yc-yr">Year '+r.y+'</span><span class="yc-rent">'+fL(r.tot)+' total</span></div>'+
-      '<div class="yc-bd">'+
-        '<div class="ent"><div class="ent-nm">Child \u2014 '+lbl+'</div>'+
-          '<div class="er"><span class="ek">HP income (rent \u00D770%)</span><span class="ev">'+fL(r.h1)+'</span></div>'+
-          ex+
-          (oi1>0?'<div class="er"><span class="ek">+ Other income</span><span class="ev">'+fL(oi1)+'</span></div>':'')+
-          '<div class="er"><span class="ek">Total taxable</span><span class="ev bld">'+fL(r.e1i)+'</span></div>'+
-          '<div class="er"><span class="ek">Income tax</span><span class="ev '+(r.e1t===0?'zero':'tax')+'">'+(r.e1t===0?'\u20B90 \u2014 nil':fL(r.e1t))+'</span></div>'+
-        '</div>'+e2b+
-      '</div>'+
-      '<div class="yc-ft"><span class="yc-ft-l">Combined tax \u2014 Year '+r.y+'</span>'+
-      '<span class="yc-ft-v '+(r.tt===0?'zero':'')+'">'+(r.tt===0?'\u20B90':fL(r.tt))+'</span></div></div>';
+    return (neg?'-':'')+'\u20B9'+r;
   }
-  document.getElementById('ycards').innerHTML=s;
-
-  // Summary table
-  var e1r='<tr><td class="lbl" style="font-weight:500">Child</td>';
-  var e2r=dual?'<tr><td class="lbl" style="font-weight:500">Parent</td>':'';
-  var tr='<tr class="sum-row"><td class="lbl">Total</td>';
-  var e1s=0,e2s=0;
-  for(y=0;y<4;y++){
-    var r=yrs[y];
-    e1r+='<td class="r">'+(r.e1t===0?'<span style="color:var(--teal);font-size:11px;">\u20B90 nil</span>':fL(r.e1t))+'</td>';
-    if(dual) e2r+='<td class="r">'+(r.e2t===0?'<span style="color:var(--teal);font-size:11px;">\u20B90 nil</span>':fL(r.e2t))+'</td>';
-    tr+='<td class="r" style="font-weight:500">'+fL(r.tt)+'</td>';
-    e1s+=r.e1t; e2s+=r.e2t;
+  function fL(n, d) {
+    d = d === undefined ? 2 : d;
+    if (Math.abs(n) >= 10000000) return '\u20B9'+(n/10000000).toFixed(d)+'Cr';
+    return '\u20B9'+(n/100000).toFixed(d)+'L';
   }
-  e1r+='<td class="r" style="color:var(--red);font-weight:500">'+fL(e1s)+'</td></tr>';
-  if(dual) e2r+='<td class="r" style="color:var(--red);font-weight:500">'+fL(e2s)+'</td></tr>';
-  tr+='<td class="r" style="color:var(--red);font-weight:500">'+fL(e1s+e2s)+'</td></tr>';
-  document.getElementById('taxtb').innerHTML=e1r+(dual?e2r:'')+tr;
+  function fLv(n) { return (n/100000).toFixed(2); } // plain number for charts
 
-  // Metrics
-  var totR=0,totT=0,b4=0,i;
-  for(i=0;i<4;i++){totR+=yrs[i].tot;totT+=yrs[i].tt;}
-  for(i=0;i<4;i++) b4+=ct((yrs[i].h1+yrs[i].h2)+oi1,false);
-  var saved=Math.max(0,b4-totT);
-
-  document.getElementById('m1').textContent=fL(totR);
-  document.getElementById('m2').textContent=totT>0?fL(totT):'\u20B90';
-  document.getElementById('m3').textContent=totT>0?((totT/totR)*100).toFixed(1)+'%':'0%';
-  document.getElementById('m4').textContent=saved>0?'+ '+fL(saved):'\u20B90';
-  var m4c=document.getElementById('m4c');
-  saved>0&&dual?m4c.classList.add('hi'):m4c.classList.remove('hi');
-
-  var rcmY=0,e2z=0;
-  for(i=0;i<4;i++){if(yrs[i].rcm)rcmY++;if(dual&&yrs[i].e2t===0)e2z++;}
-  var rec='';
-  if(dual){
-    rec='With a <strong>'+SPL[cs]+' split</strong> and <strong>Child + Parent</strong> ownership under the <strong>'+(creg==='new'?'new regime (FY 2025-26)':'old regime')+'</strong>: ';
-    rec+='Warehouse B stays below the \u20B920L GST threshold for <strong>'+rcmY+' of 4 years</strong> &mdash; tenant pays GST via RCM, zero GST filing burden on the parent for that warehouse. ';
-    if(e2z>0) rec+='Parent\u2019s income tax is <strong>\u20B90 for '+e2z+' year'+(e2z>1?'s':'')+' </strong>(87A rebate). ';
-    if(saved>0) rec+='Splitting ownership saves <strong>'+fL(saved)+' over 4 years</strong> vs child owning both.';
-  } else {
-    rec='Both warehouses are in the <strong>child\u2019s name</strong> \u2014 all rental income is taxed in one person\u2019s hands. Switch to <strong>Child + Parent</strong> ownership to split income across two tax entities'+(b4>totT?' and potentially save <strong>'+fL(Math.abs(b4-totT))+'</strong> over 4 years':'')+'. Select \u201CChild + Parent\u201D above to model it.';
+  /* ---- tax ---- */
+  function taxNew(inc) {
+    if (inc <= 0) return 0;
+    var b=[[0,400000,0],[400000,800000,.05],[800000,1200000,.1],[1200000,1600000,.15],[1600000,2000000,.2],[2000000,2400000,.25],[2400000,1e10,.3]];
+    var t=0,j; for(j=0;j<b.length;j++) if(inc>b[j][0]) t+=(Math.min(inc,b[j][1])-b[j][0])*b[j][2];
+    if(inc<=1200000) t=0;
+    return Math.round(t*1.04);
   }
-  document.getElementById('rec').innerHTML=rec;
-  document.getElementById('gen-date').textContent='Generated: '+new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
-}
+  function taxOld(inc, ag) {
+    if (inc <= 0) return 0;
+    var b,j;
+    if(ag===2)      b=[[0,500000,0],[500000,1000000,.2],[1000000,1e10,.3]];
+    else if(ag===1) b=[[0,300000,0],[300000,500000,.05],[500000,1000000,.2],[1000000,1e10,.3]];
+    else            b=[[0,250000,0],[250000,500000,.05],[500000,1000000,.2],[1000000,1e10,.3]];
+    var t=0; for(j=0;j<b.length;j++) if(inc>b[j][0]) t+=(Math.min(inc,b[j][1])-b[j][0])*b[j][2];
+    if(ag<2 && inc<=500000) t=0;
+    return Math.round(t*1.04);
+  }
+  function ct(inc, isParent) { return creg==='new' ? taxNew(inc) : taxOld(inc, isParent?cage:0); }
 
-function setSplit(i,b){
-  var a=document.getElementById('stabs').querySelectorAll('.tab');
-  for(var j=0;j<a.length;j++) a[j].classList.remove('ab');
-  b.classList.add('ab'); cs=i; render();
-}
-function setOwn(i,b){
-  var a=document.getElementById('otabs').querySelectorAll('.tab');
-  for(var j=0;j<a.length;j++) a[j].classList.remove('at');
-  b.classList.add('at'); co=i; render();
-}
-function setAge(i,b){
-  var a=document.getElementById('agtabs').querySelectorAll('.tab');
-  for(var j=0;j<a.length;j++) a[j].classList.remove('aa');
-  b.classList.add('aa'); cage=i; render();
-}
-function setReg(r){
-  creg=r;
-  document.getElementById('r-new').classList.toggle('act',r==='new');
-  document.getElementById('r-old').classList.toggle('act',r==='old');
+  /* ---- build year data ---- */
+  function buildYears() {
+    var base = parseFloat(document.getElementById('base').value) || 375000;
+    var ep   = (parseFloat(document.getElementById('esc').value)  || 5) / 100;
+    var oi_p = parseFloat(document.getElementById('oi2').value) || 0; // parent other income
+    var oi_c = parseFloat(document.getElementById('oi1').value) || 0; // child other income
+    var sp   = SP[cs];
+    var dual = (co === 1);
+    var yrs  = [];
+    for (var y=1; y<=4; y++) {
+      var mult = Math.pow(1+ep, y-1);
+      var wA   = base * sp   * 12 * mult;  // parent's warehouse (expensive)
+      var wB   = base * (1-sp) * 12 * mult; // child's warehouse  (cheaper)
+      var rcm  = (wB < THRESH);
+      var hA   = wA * 0.7, hB = wB * 0.7;
+      var piInc, ciInc, piTax, ciTax;
+      if (dual) {
+        piInc = hA + oi_p;  ciInc = hB + oi_c;
+        piTax = ct(piInc, true); ciTax = ct(ciInc, false);
+      } else {
+        // child only owns both
+        ciInc = hA + hB + oi_c; piInc = 0;
+        ciTax = ct(ciInc, false); piTax = 0;
+      }
+      yrs.push({y:y, wA:wA, wB:wB, rcm:rcm, hA:hA, hB:hB,
+                piInc:piInc, ciInc:ciInc, piTax:piTax, ciTax:ciTax,
+                tot:wA+wB, tt:piTax+ciTax});
+    }
+    return {yrs:yrs, dual:dual, base:base};
+  }
+
+  /* ---- render rent table ---- */
+  function renderRentTable(yrs, dual) {
+    var mo = (cview === 'monthly');
+    var s = '', r, i;
+    for (i=0; i<4; i++) {
+      r = yrs[i];
+      var wA_disp = mo ? inr(r.wA/12) : fL(r.wA);
+      var wB_disp = mo ? inr(r.wB/12) : fL(r.wB);
+      var tot_disp = mo ? inr(r.tot/12) : fL(r.tot);
+      var rcm_disp = r.rcm ? fL(r.wB*0.18) : '\u2014';
+      s += '<tr>' +
+        '<td class="lbl">Year '+r.y+'</td>' +
+        '<td class="r">'+wA_disp+'</td>' +
+        '<td class="r">'+wB_disp+'</td>' +
+        '<td><span class="pill '+(r.rcm?'pg':'pa')+'">'+(r.rcm?'RCM \u2014 tenant pays':'Forward charge')+'</span></td>' +
+        '<td class="r" style="color:var(--text2)">'+(r.rcm ? (mo ? inr(r.wB*0.18/12) : rcm_disp) : '\u2014')+'</td>' +
+        '<td class="r" style="font-weight:500">'+tot_disp+'</td>' +
+      '</tr>';
+    }
+    document.getElementById('rtb').innerHTML = s;
+  }
+
+  /* ---- render year cards ---- */
+  function renderCards(yrs, dual, oi_c) {
+    var s = '', r, i;
+    for (i=0; i<4; i++) {
+      r = yrs[i];
+      var pBlock = '';
+      if (dual) {
+        pBlock = '<div class="ent">'+
+          '<div class="ent-nm navy">Parent \u2014 Warehouse A (expensive)</div>'+
+          '<div class="er"><span class="ek">HP income (rent\u00d770%)</span><span class="ev">'+fL(r.hA)+'</span></div>'+
+          (r.piInc !== r.hA ? '<div class="er"><span class="ek">+ Other income</span><span class="ev">'+fL(r.piInc-r.hA)+'</span></div>' : '')+
+          '<div class="er"><span class="ek">Total taxable</span><span class="ev bld">'+fL(r.piInc)+'</span></div>'+
+          '<div class="er"><span class="ek">Income tax</span><span class="ev '+(r.piTax===0?'zero':'tax')+'">'+(r.piTax===0?'\u20B90 \u2014 nil':fL(r.piTax))+'</span></div>'+
+        '</div>';
+      }
+      var cLbl = dual ? 'Warehouse B (cheaper)' : 'Both warehouses';
+      var cExtra = !dual ? '<div class="er"><span class="ek">+ W-A HP income</span><span class="ev">'+fL(r.hA)+'</span></div>' : '';
+      s += '<div class="yc">'+
+        '<div class="yc-hd"><span class="yc-yr">Year '+r.y+'</span><span class="yc-rent">'+fL(r.tot)+' total</span></div>'+
+        '<div class="yc-bd">'+
+          pBlock+
+          '<div class="ent">'+
+            '<div class="ent-nm teal">Child \u2014 '+cLbl+'</div>'+
+            '<div class="er"><span class="ek">HP income (rent\u00d770%)</span><span class="ev">'+fL(r.hB)+'</span></div>'+
+            cExtra+
+            (oi_c>0 ? '<div class="er"><span class="ek">+ Other income</span><span class="ev">'+fL(oi_c)+'</span></div>' : '')+
+            '<div class="er"><span class="ek">Total taxable</span><span class="ev bld">'+fL(r.ciInc)+'</span></div>'+
+            '<div class="er"><span class="ek">Income tax</span><span class="ev '+(r.ciTax===0?'zero':'tax')+'">'+(r.ciTax===0?'\u20B90 \u2014 nil':fL(r.ciTax))+'</span></div>'+
+          '</div>'+
+        '</div>'+
+        '<div class="yc-ft"><span class="yc-ft-l">Combined tax \u2014 Year '+r.y+'</span>'+
+        '<span class="yc-ft-v '+(r.tt===0?'zero':'')+'">'+(r.tt===0?'\u20B90':fL(r.tt))+'</span></div>'+
+      '</div>';
+    }
+    document.getElementById('ycards').innerHTML = s;
+  }
+
+  /* ---- render summary table ---- */
+  function renderSummary(yrs, dual) {
+    var pr = dual ? '<tr><td class="lbl" style="font-weight:500">Parent</td>' : '';
+    var cr = '<tr><td class="lbl" style="font-weight:500">Child</td>';
+    var tr = '<tr class="sum-row"><td class="lbl">Total</td>';
+    var ps=0, cs2=0, i, r;
+    for (i=0; i<4; i++) {
+      r = yrs[i];
+      if (dual) pr += '<td class="r">'+(r.piTax===0?'<span style="color:var(--teal);font-size:11px;">\u20B90 nil</span>':fL(r.piTax))+'</td>';
+      cr += '<td class="r">'+(r.ciTax===0?'<span style="color:var(--teal);font-size:11px;">\u20B90 nil</span>':fL(r.ciTax))+'</td>';
+      tr += '<td class="r" style="font-weight:500">'+fL(r.tt)+'</td>';
+      ps += r.piTax; cs2 += r.ciTax;
+    }
+    if (dual) pr += '<td class="r" style="color:var(--red);font-weight:500">'+fL(ps)+'</td></tr>';
+    cr += '<td class="r" style="color:var(--red);font-weight:500">'+fL(cs2)+'</td></tr>';
+    tr += '<td class="r" style="color:var(--red);font-weight:500">'+fL(ps+cs2)+'</td></tr>';
+    document.getElementById('taxtb').innerHTML = (dual?pr:'')+cr+tr;
+  }
+
+  /* ---- render charts ---- */
+  function renderCharts(yrs, dual) {
+    if (typeof Chart === 'undefined') return;
+    var labels = ['Year 1','Year 2','Year 3','Year 4'];
+
+    /* Rent chart */
+    if (rentChart) { rentChart.destroy(); rentChart = null; }
+    var ctx1 = document.getElementById('chart-rent');
+    if (ctx1) {
+      rentChart = new Chart(ctx1, {
+        data: {
+          labels: labels,
+          datasets: [
+            { type:'bar', label:'Parent (W-A)', data: yrs.map(function(r){return parseFloat(fLv(r.wA));}), backgroundColor:'#1B3A6B', stack:'s', order:2 },
+            { type:'bar', label:'Child (W-B)',  data: yrs.map(function(r){return parseFloat(fLv(r.wB));}), backgroundColor:'#0E6652', stack:'s', order:2 },
+            { type:'line', label:'\u20B920L GST limit', data:[20,20,20,20], borderColor:'#A8302E', borderWidth:2, borderDash:[6,4], pointRadius:0, fill:false, order:1 }
+          ]
+        },
+        options:{
+          responsive:true, maintainAspectRatio:false,
+          plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:function(c){ return c.dataset.label+': \u20B9'+c.parsed.y.toFixed(2)+'L'; } } } },
+          scales:{
+            x:{ ticks:{font:{size:11}, color:'#6B6558'}, grid:{display:false} },
+            y:{ ticks:{ callback:function(v){return '\u20B9'+v+'L';}, font:{size:11}, color:'#6B6558' }, grid:{color:'rgba(0,0,0,0.06)'} }
+          }
+        }
+      });
+    }
+
+    /* Tax chart */
+    if (taxChart) { taxChart.destroy(); taxChart = null; }
+    var ctx2 = document.getElementById('chart-tax');
+    if (ctx2) {
+      var ds = [];
+      if (dual) {
+        ds.push({ label:'Parent', data: yrs.map(function(r){return parseFloat(fLv(r.piTax));}), backgroundColor:'#1B3A6B', borderRadius:4 });
+      }
+      ds.push({ label:'Child', data: yrs.map(function(r){return parseFloat(fLv(r.ciTax));}), backgroundColor:'#0E6652', borderRadius:4 });
+      taxChart = new Chart(ctx2, {
+        type:'bar',
+        data:{ labels:labels, datasets:ds },
+        options:{
+          responsive:true, maintainAspectRatio:false,
+          plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:function(c){ return c.dataset.label+': \u20B9'+c.parsed.y.toFixed(2)+'L'; } } } },
+          scales:{
+            x:{ ticks:{font:{size:11},color:'#6B6558'}, grid:{display:false} },
+            y:{ ticks:{ callback:function(v){return '\u20B9'+v+'L';}, font:{size:11}, color:'#6B6558' }, grid:{color:'rgba(0,0,0,0.06)'} }
+          }
+        }
+      });
+    }
+  }
+
+  /* ---- main render ---- */
+  function render() {
+    var d = buildYears();
+    var yrs = d.yrs, dual = d.dual, base = d.base;
+    var oi_c = parseFloat(document.getElementById('oi1').value) || 0;
+    var sp = SP[cs];
+
+    /* ownership visibility */
+    document.getElementById('oi2').disabled = !dual;
+    document.getElementById('age-section').style.display = dual ? 'block' : 'none';
+    document.getElementById('who-grid').style.display = dual ? '' : 'none';
+
+    /* update who-grid badges */
+    var wAmo = inr(base * sp);
+    var wBmo = inr(base * (1-sp));
+    document.getElementById('who-parent-wh').innerHTML = 'W-A &mdash; '+wAmo+'/mo';
+    document.getElementById('who-child-wh').innerHTML  = 'W-B &mdash; '+wBmo+'/mo';
+
+    /* sub-renders */
+    renderRentTable(yrs, dual);
+    renderCards(yrs, dual, oi_c);
+    renderSummary(yrs, dual);
+    renderCharts(yrs, dual);
+
+    /* metrics */
+    var totR=0, totT=0, b4=0, i;
+    for(i=0;i<4;i++){totR+=yrs[i].tot; totT+=yrs[i].tt;}
+    /* baseline = child owns both, same child other income */
+    for(i=0;i<4;i++) b4 += ct((yrs[i].hA+yrs[i].hB)+oi_c, false);
+    var saved = Math.max(0, b4-totT);
+
+    document.getElementById('m1').textContent = fL(totR);
+    document.getElementById('m2').textContent = totT>0 ? fL(totT) : '\u20B90';
+    document.getElementById('m3').textContent = totT>0 ? ((totT/totR)*100).toFixed(1)+'%' : '0%';
+    document.getElementById('m4').textContent = saved>0 ? '+ '+fL(saved) : '\u20B90';
+    var m4c = document.getElementById('m4c');
+    (saved>0&&dual) ? m4c.classList.add('hi') : m4c.classList.remove('hi');
+
+    /* recommendation */
+    var rcmY=0, e2z=0;
+    for(i=0;i<4;i++){ if(yrs[i].rcm) rcmY++; if(dual&&yrs[i].ciTax===0) e2z++; }
+    var pz=0; for(i=0;i<4;i++) if(dual&&yrs[i].piTax===0) pz++;
+    var rec = '';
+    if (dual) {
+      rec  = 'With a <strong>'+SPL[cs]+' split</strong>, parent holds the expensive warehouse (W-A, GST registered) and child holds the cheaper one (W-B, RCM). ';
+      rec += 'Child\'s W-B stays below &#8377;20L GST threshold for <strong>'+rcmY+' of 4 years</strong> \u2014 tenant pays GST via RCM, child has <strong>zero GST compliance burden</strong>. ';
+      if(e2z>0) rec += 'Child pays <strong>&#8377;0 income tax for '+e2z+' year'+(e2z>1?'s':'')+' </strong>(87A rebate). ';
+      if(pz>0)  rec += 'Parent pays &#8377;0 for '+pz+' year'+(pz>1?'s':'')+'. ';
+      if(saved>0) rec += 'Total saving vs single-owner: <strong>'+fL(saved)+' over 4 years</strong>.';
+    } else {
+      rec = 'Both warehouses are in the <strong>child\'s name</strong>. Switch to <strong>Parent + Child</strong> ownership to split income and'+(b4>totT?' save <strong>'+fL(Math.abs(b4-totT))+'</strong> over 4 years':' reduce tax liability')+'. Select \u201CParent + Child\u201D above.';
+    }
+    document.getElementById('rec').innerHTML = rec;
+
+    /* date */
+    var now = new Date();
+    var mo = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    document.getElementById('gen-date').textContent = 'Generated: '+now.getDate()+' '+mo[now.getMonth()]+' '+now.getFullYear();
+  }
+
+  /* ---- event listeners ---- */
+  document.getElementById('btn-print').addEventListener('click', function(){ window.print(); });
+  document.getElementById('base').addEventListener('input', render);
+  document.getElementById('esc').addEventListener('input', render);
+  document.getElementById('oi1').addEventListener('input', render);
+  document.getElementById('oi2').addEventListener('input', render);
+
+  /* split tabs */
+  var stabs = document.getElementById('stabs').querySelectorAll('.tab');
+  (function(){
+    for (var i=0; i<stabs.length; i++) {
+      (function(btn, idx){
+        btn.addEventListener('click', function(){
+          for(var j=0;j<stabs.length;j++) stabs[j].classList.remove('ab');
+          btn.classList.add('ab'); cs=idx; render();
+        });
+      })(stabs[i], parseInt(stabs[i].getAttribute('data-split'),10));
+    }
+  })();
+
+  /* own tabs */
+  var otabs = document.getElementById('otabs').querySelectorAll('.tab');
+  (function(){
+    for (var i=0; i<otabs.length; i++) {
+      (function(btn, idx){
+        btn.addEventListener('click', function(){
+          for(var j=0;j<otabs.length;j++) otabs[j].classList.remove('at');
+          btn.classList.add('at'); co=idx; render();
+        });
+      })(otabs[i], parseInt(otabs[i].getAttribute('data-own'),10));
+    }
+  })();
+
+  /* age tabs */
+  var agtabs = document.getElementById('agtabs').querySelectorAll('.tab');
+  (function(){
+    for (var i=0; i<agtabs.length; i++) {
+      (function(btn, idx){
+        btn.addEventListener('click', function(){
+          for(var j=0;j<agtabs.length;j++) agtabs[j].classList.remove('aa');
+          btn.classList.add('aa'); cage=idx; render();
+        });
+      })(agtabs[i], parseInt(agtabs[i].getAttribute('data-age'),10));
+    }
+  })();
+
+  /* regime */
+  document.getElementById('r-new').addEventListener('click', function(){
+    creg='new';
+    document.getElementById('r-new').classList.add('act');
+    document.getElementById('r-old').classList.remove('act');
+    render();
+  });
+  document.getElementById('r-old').addEventListener('click', function(){
+    creg='old';
+    document.getElementById('r-old').classList.add('act');
+    document.getElementById('r-new').classList.remove('act');
+    render();
+  });
+
+  /* annual / monthly toggle */
+  document.getElementById('vt-annual').addEventListener('click', function(){
+    cview='annual';
+    document.getElementById('vt-annual').classList.add('act');
+    document.getElementById('vt-monthly').classList.remove('act');
+    render();
+  });
+  document.getElementById('vt-monthly').addEventListener('click', function(){
+    cview='monthly';
+    document.getElementById('vt-monthly').classList.add('act');
+    document.getElementById('vt-annual').classList.remove('act');
+    render();
+  });
+
+  /* go */
   render();
-}
-render();
+
+}); /* end DOMContentLoaded */
 </script>
 </body>
 </html>
